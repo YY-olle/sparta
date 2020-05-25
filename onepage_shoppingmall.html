@@ -1,0 +1,141 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>상품주문화면</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cute+Font&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+    <style>
+        * {
+            font-family: 'Cute Font', cursive;
+        }
+
+        .wrap {
+            width: 500px;
+            margin: auto;
+        }
+
+
+        .image img {
+            margin: auto;
+            display: block;
+        }
+
+        .button button {
+            margin: auto;
+            display: block;
+        }
+    </style>
+
+
+    <script>
+        function input_check() {
+            let val1 = $('#input-q1').val();
+            let val2 = $('#input-q2').val();
+            let val3 = $('#input-q3').val();
+            let val4 = $('#input-q4').val();
+
+            if (val1 == '') { alert('이름을 입력하세요'); }
+            else if (val2 == '두~개 사세요') { alert('수량을 선택하세요'); }
+            else if (val3 == '') { alert('주소를 입력하세요'); }
+            else if (val4 == '') { alert('전화번호를 입력해주세요') }
+            else { alert('주문해주셔서 감사합니다') }
+
+        }
+
+        $(document).ready(function () {
+            alert('다 로딩됐다!')
+          //  let rate = response[1]['rate'];
+            
+            
+
+            // 여기에 환율 API Ajax 요청을 하면 되겠죠?
+            $.ajax({
+                type: "GET",
+                url: "https://api.manana.kr/exchange/rate.json",
+                data: {}, 
+                success: function (response) { // 서버에서 준 결과를 response라는 변수에 담음
+                   
+                    var rate = response[1]['rate'];
+                    $("#rate").html(rate) //div에 받아온 값을 넣는다.
+               
+                }
+                
+            })
+           
+
+
+        }); 
+    </script>
+
+</head>
+
+<body>
+    <div class="image">
+        <img
+            src="data:image/jpeg;base64,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" />
+    </div>
+    <div class="wrap">
+        <div>
+            <p><font color=blue>
+                달러-원 환율 : <span id=rate></span>
+            </font></p>
+        </div>
+        <div>
+            <h1><b>촉촉립밤</b>
+                <font size=3px>가격 : 5,000원/개 </font>
+            </h1>
+            <p>스테디 샐러 립밤 드디어 입고! 품절나기 전에 업어가세요~
+        </div>
+
+        <div>
+            <h1><b>주문하기</b></h1>
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">주문자 이름</span>
+            </div>
+            <input type="text" class="form-control" aria-describedby="basic-addon1" id="input-q1">
+        </div>
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <label class="input-group-text" for="inputGroupSelect01">수량</label>
+            </div>
+            <select class="custom-select" id="input-q2">
+                <option selected>두~개 사세요</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
+        </div>
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">주소</span>
+            </div>
+            <input type="text" class="form-control" aria-describedby="basic-addon1" id="input-q3">
+        </div>
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">전화번호</span>
+            </div>
+            <input type="text" class="form-control" aria-describedby="basic-addon1" id="input-q4">
+        </div>
+    </div>
+
+
+    <div class="button">
+        <div><button onclick="input_check()" type="button" class="btn btn-secondary">주문하기</button>
+        </div>
+    </div>
+
+</body>
+
+</html>
